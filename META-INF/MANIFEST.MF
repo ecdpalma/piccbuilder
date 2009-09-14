@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PICCBuilder Plug-in
+Bundle-SymbolicName: org.bitbrushers.piccbuilder;singleton:=true
+Bundle-Version: 0.5.3.qualifier
+Bundle-Vendor: SourceForge Project
+Require-Bundle: org.eclipse.cdt.managedbuilder.core;bundle-version="5.0.2",
+ org.eclipse.cdt.ui;bundle-version="5.0.2",
+ org.eclipse.cdt.make.ui;bundle-version="5.0.1",
+ org.eclipse.cdt.core;bundle-version="5.0.2",
+ org.eclipse.core.resources;bundle-version="3.4.0",
+ org.eclipse.core.runtime;bundle-version="3.4.0",
+ org.eclipse.jface;bundle-version="3.4.0",
+ org.eclipse.ui;bundle-version="3.4.0",
+ org.eclipse.ui.console;bundle-version="3.3.0",
+ org.eclipse.cdt.managedbuilder.gnu.ui;bundle-version="5.0.0",
+ org.eclipse.cdt.managedbuilder.ui;bundle-version="5.0.2"
+Bundle-Activator: org.bitbrushers.piccbuilder.PICCBuilderPlugin
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: bin/
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
