@@ -1139,7 +1139,7 @@
          </option>
       </tool>
       <configuration
-            cleanCommand="del /SQ"
+            cleanCommand="del"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.bitbrushers.piccbuilder.c30.configuration.base"
             name="PIC C30 Configuration">
@@ -1156,7 +1156,7 @@
          </enablement>
       </configuration>
       <configuration
-            cleanCommand="del /SQ"
+            cleanCommand="del"
             id="org.bitbrushers.piccbuilder.c30.windows.configuration.base"
             name="PIC C30 Configuration"
             parent="org.bitbrushers.piccbuilder.c30.configuration.base">
@@ -2555,7 +2555,7 @@
          </inputType>
       </tool>
       <configuration
-            cleanCommand="del /SQ"
+            cleanCommand="del"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.bitbrushers.piccbuilder.c32.configuration.base"
             name="PIC C32 Configuration">
@@ -2571,7 +2571,7 @@
          </enablement>
       </configuration>
       <configuration
-            cleanCommand="del /SQ"
+            cleanCommand="del"
             id="org.bitbrushers.piccbuilder.c32.windows.configuration.base"
             name="PIC C32 Configuration"
             parent="org.bitbrushers.piccbuilder.c32.configuration.base">
