@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: PICCBuilder Plug-in
 Bundle-SymbolicName: org.bitbrushers.piccbuilder;singleton:=true
-Bundle-Version: 0.5.3.qualifier
+Bundle-Version: 0.4.0.qualifier
 Bundle-Vendor: SourceForge Project
 Require-Bundle: org.eclipse.cdt.managedbuilder.core;bundle-version="5.0.2",
  org.eclipse.cdt.ui;bundle-version="5.0.2",
