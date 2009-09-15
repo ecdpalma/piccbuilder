@@ -1232,7 +1232,6 @@
                superClass="org.bitbrushers.piccbuilder.assembler">
             <inputType
                   id="org.bitbrushers.piccbuilder.windows.assembler.base.input"
-				  scannerConfigDiscoveryProfileId="org.bitbrushers.piccbuilder.ARM_GCCWinManagedMakePerProjectProfileC|org.bitbrushers.piccbuilder.ARM_GCCWinStandardMakePerFileProfile"
                   superClass="org.bitbrushers.piccbuilder.assembler.input">
             </inputType>
          </tool>
@@ -1243,7 +1242,6 @@
                superClass="org.bitbrushers.piccbuilder.c.compiler">
             <inputType
                   id="org.bitbrushers.piccbuilder.windows.c.compiler.base.input"
-				  scannerConfigDiscoveryProfileId="org.bitbrushers.piccbuilder.ARM_GCCWinManagedMakePerProjectProfileC|org.bitbrushers.piccbuilder.ARM_GCCWinStandardMakePerFileProfile"
                   superClass="org.bitbrushers.piccbuilder.c.compiler.input">
             </inputType>
          </tool>
