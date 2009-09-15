@@ -12,7 +12,7 @@
       <content-type
             base-type="org.eclipse.core.runtime.text"
             file-extensions="hex"
-            id="org.bitbrushers.piccbuilder.c30.content-type.hex"
+            id="org.bitbrushers.piccbuilder.content-type.hex"
             name="FLASH Hex file"
             priority="normal">
       </content-type>
@@ -28,6 +28,9 @@
          <toolChain
                id="org.bitbrushers.piccbuilder.c30.windows.toolchain.base">
          </toolChain>
+         <toolChain
+               id="org.bitbrushers.piccbuilder.c32.windows.toolchain.base">
+         </toolChain>
       </template>
    </extension>
    <extension
@@ -35,12 +38,12 @@
          name="Build Properties"
          point="org.eclipse.cdt.managedbuilder.core.buildProperties">
       <propertyValue
-            id="org.bitbrushers.piccbuilder.c30.buildArtefactType.application"
+            id="org.bitbrushers.piccbuilder.buildArtefactType.application"
             name="PIC Cross Target Application"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
       <propertyValue
-            id="org.bitbrushers.piccbuilder.c30.buildArtefactType.staticLib"
+            id="org.bitbrushers.piccbuilder.buildArtefactType.staticLib"
             name="PIC Cross Target Static Library"
             property="org.eclipse.cdt.build.core.buildArtefactType">
       </propertyValue>
@@ -59,7 +62,7 @@
       <tool
             id="org.bitbrushers.piccbuilder.c30.base"
             isAbstract="true"
-            name="Options Placeholder">
+            name="C30 Options Placeholder">
          <option
                id="org.bitbrushers.piccbuilder.c30.base.option.optimization.level"
                name="Optimization Level"
@@ -171,7 +174,7 @@
                   type="ALL">
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildArtefactType"
-                     value="org.bitbrushers.piccbuilder.c30.buildArtefactType.application">
+                     value="org.bitbrushers.piccbuilder.buildArtefactType.application">
                </checkBuildProperty>
             </enablement>
          </option>
@@ -201,6 +204,21 @@
                name="Other debugging flags"
                valueType="string">
          </option>
+         <option
+               id="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat"
+               name="Object file format (-omf)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat.coff"
+                  name="COFF">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-omf=elf"
+                  id="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat.elf"
+                  isDefault="true"
+                  name="ELF/DWARF">
+            </enumeratedOptionValue>
+         </option>
       </tool>
       <builder
             command="mingw32-make"
@@ -212,7 +230,7 @@
       </builder>
       <tool
             command="pic30-gcc"
-            commandLineGenerator="org.bitbrushers.piccbuilder.c30.PICManagedCommandLineGenerator"
+            commandLineGenerator="org.bitbrushers.piccbuilder.PICManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.bitbrushers.piccbuilder.c30.assembler"
             isAbstract="false"
@@ -402,7 +420,7 @@
       </tool>
       <tool
             command="pic30-gcc"
-            commandLineGenerator="org.bitbrushers.piccbuilder.c30.PICManagedCommandLineGenerator"
+            commandLineGenerator="org.bitbrushers.piccbuilder.PICManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GCCErrorParser"
             id="org.bitbrushers.piccbuilder.c30.c.compiler"
             isAbstract="false"
@@ -817,7 +835,7 @@
       </tool>
       <tool
             command="pic30-gcc"
-            commandLineGenerator="org.bitbrushers.piccbuilder.c30.PICManagedCommandLineGenerator"
+            commandLineGenerator="org.bitbrushers.piccbuilder.PICManagedCommandLineGenerator"
             errorParsers="org.eclipse.cdt.core.GLDErrorParser"
             id="org.bitbrushers.piccbuilder.c30.c.linker"
             isAbstract="false"
@@ -828,14 +846,14 @@
                type="ALL">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.bitbrushers.piccbuilder.c30.buildArtefactType.application">
+                  value="org.bitbrushers.piccbuilder.buildArtefactType.application">
             </checkBuildProperty>
          </enablement>
          <supportedProperties>
             <property
                   id="org.eclipse.cdt.build.core.buildArtefactType">
                <value
-                     id="org.bitbrushers.piccbuilder.c30.buildArtefactType.application">
+                     id="org.bitbrushers.piccbuilder.buildArtefactType.application">
                </value>
             </property>
          </supportedProperties>
@@ -860,14 +878,14 @@
          </option>
          <option
                category="org.bitbrushers.piccbuilder.c30.c.link.category.general"
-               command="--defsym=_min_heap_size="
+               command="--heap="
                id="org.bitbrushers.piccbuilder.c30.c.link.option.heapSize"
                name="Heap size"
                valueType="string">
          </option>
          <option
                category="org.bitbrushers.piccbuilder.c30.c.link.category.general"
-               command="--defsym=_min_stack_size="
+               command="--stack="
                id="org.bitbrushers.piccbuilder.c30.c.link.option.minStackSize"
                name="Min stack size"
                valueType="string">
@@ -1024,14 +1042,14 @@
                type="ALL">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.bitbrushers.piccbuilder.c30.buildArtefactType.staticLib">
+                  value="org.bitbrushers.piccbuilder.buildArtefactType.staticLib">
             </checkBuildProperty>
          </enablement>
          <supportedProperties>
             <property
                   id="org.eclipse.cdt.build.core.buildArtefactType">
                <value
-                     id="org.bitbrushers.piccbuilder.c30.buildArtefactType.staticLib">
+                     id="org.bitbrushers.piccbuilder.buildArtefactType.staticLib">
                </value>
             </property>
          </supportedProperties>
@@ -1088,7 +1106,7 @@
                type="ALL">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
-                  value="org.bitbrushers.piccbuilder.c30.buildArtefactType.application">
+                  value="org.bitbrushers.piccbuilder.buildArtefactType.application">
             </checkBuildProperty>
          </enablement>
          <optionCategory
@@ -1104,19 +1122,19 @@
             <enumeratedOptionValue
                   command="-omf=COFF"
                   id="org.bitbrushers.piccbuilder.c30.createhex.general.inputformat.coff"
-                  isDefault="true"
                   name="COFF">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-omf=ELF"
                   id="org.bitbrushers.piccbuilder.c30.createhex.general.inputformat.elf"
+                  isDefault="true"
                   name="ELF">
             </enumeratedOptionValue>
          </option>
          <outputType
                buildVariable="SECONDARY_hex"
                id="org.bitbrushers.piccbuilder.c30.createhex.output"
-               outputContentType="org.bitbrushers.piccbuilder.c30.content-type.hex"
+               outputContentType="org.bitbrushers.piccbuilder.content-type.hex"
                outputNames="${BuildArtifactFileBaseName}.hex"
                outputs="hex">
          </outputType>
@@ -1124,7 +1142,7 @@
                id="org.bitbrushers.piccbuilder.c30.createhex.input"
                multipleOfType="true"
                option="org.bitbrushers.piccbuilder.c30.createhex.InFileName"
-               sources="cof">
+               sources="elf">
          </inputType>
          <option
                id="org.bitbrushers.piccbuilder.c30.createhex.InFileName"
@@ -1200,6 +1218,16 @@
                superClass="org.bitbrushers.piccbuilder.c30.base.option.processor">
          </option>
          <optionCategory
+               id="org.bitbrushers.piccbuilder.c30.windows.category.general"
+               name="General">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c30.windows.category.general"
+               id="org.bitbrushers.piccbuilder.c30.windows.option.general.objectfileformat"
+               name="Object file format"
+               superClass="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat">
+         </option>
+         <optionCategory
                id="org.bitbrushers.piccbuilder.c30.windows.category.debugging"
                name="Debugging">
          </optionCategory>
@@ -1272,19 +1300,19 @@
                <and>
                   <checkBuildProperty
                         property="org.eclipse.cdt.build.core.buildArtefactType"
-                        value="org.bitbrushers.piccbuilder.c30.buildArtefactType.application">
+                        value="org.bitbrushers.piccbuilder.buildArtefactType.application">
                   </checkBuildProperty>
                </and>
             </enablement>
          </tool>
       </toolChain>
       <projectType
-            buildArtefactType="org.bitbrushers.piccbuilder.c30.buildArtefactType.application"
+            buildArtefactType="org.bitbrushers.piccbuilder.buildArtefactType.application"
             id="org.bitbrushers.piccbuilder.c30.windows.elf"
             isAbstract="true"
             name="PIC C30 Application">
          <configuration
-               artifactExtension="cof"
+               artifactExtension="elf"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.bitbrushers.piccbuilder.c30.windows.elf.debug"
                name="Debug"
@@ -1329,7 +1357,7 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="cof"
+               artifactExtension="elf"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.bitbrushers.piccbuilder.c30.windows.elf.release"
                name="Release"
@@ -1375,7 +1403,7 @@
          </configuration>
       </projectType>
       <projectType
-            buildArtefactType="org.bitbrushers.piccbuilder.c30.buildArtefactType.staticLib"
+            buildArtefactType="org.bitbrushers.piccbuilder.buildArtefactType.staticLib"
             id="org.bitbrushers.piccbuilder.c30.windows.lib"
             isAbstract="true"
             name="PIC C30 Static Library">
@@ -1461,6 +1489,1417 @@
       
       
       
+   </extension>
+   
+   
+   
+   
+   <extension
+         id="PIC_GCC_BuildDefinitions"
+         name="Managed Build Definitions"
+         point="org.eclipse.cdt.managedbuilder.core.buildDefinitions">
+      <managedBuildRevision
+            fileVersion="4.0.0">
+      </managedBuildRevision>
+      <tool
+            id="org.bitbrushers.piccbuilder.c32.base"
+            isAbstract="true"
+            name="C32 Options Placeholder">
+         <option
+               id="org.bitbrushers.piccbuilder.c32.base.option.optimization.level"
+               name="Optimization Level"
+               valueType="enumerated">
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.size">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.none">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+            <enumeratedOptionValue
+                  command="-O0"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.none"
+                  name="None (-O0)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O1"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.optimize"
+                  name="Optimize (-O1)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O2"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.more"
+                  isDefault="true"
+                  name="Optimize more (-O2)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-O3"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.most"
+                  name="Optimize most (-O3)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-Os"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.optimization.level.size"
+                  name="Optimize size (-Os)">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               id="org.bitbrushers.piccbuilder.c32.base.option.debugging.level"
+               name="Debug Level"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.none"
+                  isDefault="false"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-g"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.default"
+                  isDefault="true"
+                  name="Default (-g)">
+            </enumeratedOptionValue>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.none">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.max">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               id="org.bitbrushers.piccbuilder.c32.base.option.processor"
+               name="Processor (-mprocessor)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mprocessor=32MX360F512L"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.mprocessor.PIC32MX360F512L"
+                  name="PIC32MX360F512L">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mprocessor=32MX360F256L"
+                  id="org.bitbrushers.piccbuilder.c32.base.option.mprocessor.PIC32MX360F256L"
+                  name="PIC32MX360F256L">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               defaultValue="true"
+               id="org.bitbrushers.piccbuilder.c32.base.option.addtools.createhex"
+               name="Create Hex Image"
+               valueType="boolean">
+            <enablement
+                  type="ALL">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildArtefactType"
+                     value="org.bitbrushers.piccbuilder.buildArtefactType.application">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
+               command="-Xlinker --cref"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.base.option.other.cref"
+               name="Cross Reference (-Xlinker --cref)"
+               valueType="boolean">
+         </option>
+         <option
+               command="-Xlinker --print-map"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.base.option.other.printmap"
+               name="Print link map (-Xlinker --print-map)"
+               valueType="boolean">
+         </option>
+         <option
+               command="-Wl,-Map,"
+               defaultValue="${BuildArtifactFileBaseName}.map"
+               id="org.bitbrushers.piccbuilder.c32.base.option.other.mapfilename"
+               name="Map Filename"
+               valueType="string">
+         </option>
+         <option
+               id="org.bitbrushers.piccbuilder.c32.base.option.debugging.other"
+               name="Other debugging flags"
+               valueType="string">
+         </option>
+      </tool>
+      <builder
+            command="mingw32-make"
+            id="org.bitbrushers.piccbuilder.c32.builder"
+            isAbstract="false"
+            isVariableCaseSensitive="false"
+            name="PIC  Make builder"
+            superClass="cdt.managedbuild.target.gnu.builder">
+      </builder>
+      <tool
+            command="pic32-gcc"
+            commandLineGenerator="org.bitbrushers.piccbuilder.PICManagedCommandLineGenerator"
+            errorParsers="org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser"
+            id="org.bitbrushers.piccbuilder.c32.assembler"
+            isAbstract="false"
+            name="PIC C32 Assembler"
+            natureFilter="both"
+            outputFlag="-o">
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildType">
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.debug">
+               </value>
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.release">
+               </value>
+            </property>
+         </supportedProperties>
+         <envVarBuildPath
+               pathType="buildpathInclude"
+               variableList="CPATH,C_INCLUDE_PATH">
+         </envVarBuildPath>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.assembler.category.preprocessor"
+               name="Preprocessor"
+               owner="org.bitbrushers.piccbuilder.c32.assembler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.preprocessor"
+               command="-x assembler-with-cpp"
+               commandFalse="-x assembler"
+               defaultValue="true"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.usecpp"
+               name="Use preprocessor"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.preprocessor"
+               command="-nostdinc"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.preprocessor.nostdinc"
+               name="Do not search system directories (-nostdinc)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.preprocessor"
+               command="-E"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.preprocessor.preprocess"
+               name="Preprocess only (-E)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.preprocessor"
+               command="-D"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.preprocessor.def"
+               name="Defined symbols (-D)"
+               valueType="definedSymbols">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.preprocessor"
+               command="-U"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.preprocessor.undef"
+               name="Undefined symbols (-U)"
+               valueType="undefDefinedSymbols">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.assembler.category.dirs"
+               name="Directories"
+               owner="org.bitbrushers.piccbuilder.c32.assembler">
+         </optionCategory>
+         <option
+               browseType="directory"
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.dirs"
+               command="-I"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.include.paths"
+               name="Include paths (-I)"
+               valueType="includePath">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               name="Warnings"
+               owner="org.bitbrushers.piccbuilder.c32.assembler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-fsyntax-only"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.syntax"
+               name="Check syntax only (-fsyntax-only)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-pedantic"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.pedantic"
+               name="Pedantic (-pedantic)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-pedantic-errors"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.pedantic.error"
+               name="Pedantic warnings as errors (-pedantic-errors)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-w"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.nowarn"
+               name="Inhibit all warnings (-w)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-Wall"
+               defaultValue="true"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.allwarn"
+               name="All warnings (-Wall)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-Wextra"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.extrawarn"
+               name="Extra warnings (-Wextra)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.warnings"
+               command="-Werror"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.warnings.toerrors"
+               name="Warnings as errors (-Werror)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               name="Miscellaneous"
+               owner="org.bitbrushers.piccbuilder.c32.assembler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               command="-Xassembler ${VALUE}"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.xflags"
+               name="Assembler flags"
+               valueType="stringList">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               command="-ansi"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.misc.ansi"
+               name="Support ANSI programs (-ansi)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               command="-v"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.other.verbose"
+               name="Verbose (-v)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               command="--keep-locals"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.other.keeplocals"
+               name="Keep local symbols (--keep-locals)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               command="-mno-float"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.other.excludefloat"
+               name="Exclude floating point library (-mno-float)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.assembler.category.other"
+               id="org.bitbrushers.piccbuilder.c32.assembler.option.other.other"
+               name="Other flags"
+               valueType="string">
+         </option>
+         <inputType
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
+               dependencyContentType="org.eclipse.cdt.core.cHeader"
+               dependencyExtensions="h"
+               id="org.bitbrushers.piccbuilder.c32.assembler.input"
+               sourceContentType="org.eclipse.cdt.core.asmSource"
+               sources="s,S">
+         </inputType>
+         <outputType
+               buildVariable="OBJS"
+               id="org.bitbrushers.piccbuilder.c32.assembler.output"
+               outputs="o">
+         </outputType>
+      </tool>
+      <tool
+            command="pic32-gcc"
+            commandLineGenerator="org.bitbrushers.piccbuilder.PICManagedCommandLineGenerator"
+            errorParsers="org.eclipse.cdt.core.GCCErrorParser"
+            id="org.bitbrushers.piccbuilder.c32.c.compiler"
+            isAbstract="false"
+            name="PIC C32 C Compiler"
+            natureFilter="both"
+            outputFlag="-o">
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildType">
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.debug">
+               </value>
+               <value
+                     id="org.eclipse.cdt.build.core.buildType.release">
+               </value>
+            </property>
+         </supportedProperties>
+         <envVarBuildPath
+               pathType="buildpathInclude"
+               variableList="CPATH,C_INCLUDE_PATH">
+         </envVarBuildPath>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.category.preprocessor"
+               name="Preprocessor"
+               owner="org.bitbrushers.piccbuilder.c32.c.compiler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.preprocessor"
+               command="-nostdinc"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.preprocessor.nostdinc"
+               name="Do not search system directories (-nostdinc)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.preprocessor"
+               command="-E"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.preprocessor.preprocess"
+               name="Preprocess only (-E)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.preprocessor"
+               command="-D"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.preprocessor.def"
+               name="Defined symbols (-D)"
+               valueType="definedSymbols">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.preprocessor"
+               command="-U"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.preprocessor.undef"
+               name="Undefined symbols (-U)"
+               valueType="undefDefinedSymbols">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.category.dirs"
+               name="Directories"
+               owner="org.bitbrushers.piccbuilder.c32.c.compiler">
+         </optionCategory>
+         <option
+               browseType="directory"
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.dirs"
+               command="-I"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.include.paths"
+               name="Include paths (-I)"
+               valueType="includePath">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               name="Optimization"
+               owner="org.bitbrushers.piccbuilder.c32.c.compiler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.level"
+               name="Optimization level"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.optimization.level">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               command="-fpack-struct"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.packstruct"
+               name="Pack structures (-fpack-struct)"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               command="-fshort-enums"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.shortenums"
+               name="Short enumerations (-fshort-enums)"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               command="-ffunction-sections"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.functionsections"
+               name="Function sections (-ffunction-sections)"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               command="-fdata-sections"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.datasections"
+               name="Data sections (-fdata-sections)"
+               resourceFilter="all"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               command="-funroll-loops"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.unrollloops"
+               name="Unroll loops"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               command="-fomit-frame-pointer"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.omitframepointer"
+               name="Omit frame pointer"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.flags"
+               name="Other optimization flags"
+               valueType="string">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.preinstructionscheduling"
+               isAbstract="false"
+               name="Pre-optimization instruction schedulling"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.preinstructionscheduling.defaulttolevel"
+                  isDefault="true"
+                  name="Default to level">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-fno-schedule-insns"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.preinstructionscheduling.disabled"
+                  name="Disabled">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-fschedule-insns"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.preinstructionscheduling.enabled"
+                  name="Enabled">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.optimization"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.postinstructionscheduling"
+               isAbstract="false"
+               name="Post-optimization instruction schedulling"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.postinstructionscheduling.defaulttolevel"
+                  isDefault="true"
+                  name="Default to level">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-fno-schedule-insns2"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.postinstructionscheduling.disabled"
+                  name="Disabled">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-fschedule-insns2"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.optimization.postinstructionscheduling.enabled"
+                  name="Enabled">
+            </enumeratedOptionValue>
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.category.memorymodel"
+               name="Memory model"
+               owner="org.bitbrushers.piccbuilder.c32.c.compiler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.memorymodel"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.datamodel"
+               isAbstract="false"
+               name="Data model"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.datamodel.default"
+                  isDefault="true"
+                  name="Default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mlarge-data"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.datamodel.large"
+                  name="Large data model">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-msmall-data"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.datamodel.small"
+                  name="Small data model">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.memorymodel"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.scalarmodel"
+               isAbstract="false"
+               name="Scalar model"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.scalarmodel.default"
+                  isDefault="true"
+                  name="Default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mlarge-scalar"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.scalarmodel.large"
+                  name="Large scalar model">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-msmall-scalar"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.scalarmodel.small"
+                  name="Small scalar model">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.memorymodel"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.codemodel"
+               isAbstract="false"
+               name="Code model"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.codemodel.default"
+                  isDefault="true"
+                  name="Default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mlarge-code"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.codemodel.large"
+                  name="Large code model">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-msmall-code"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.codemodel.small"
+                  name="Small code model">
+            </enumeratedOptionValue>
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.memorymodel"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.constants"
+               isAbstract="false"
+               name="Location of Constants"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.constants.default"
+                  isDefault="true"
+                  name="Default">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mconst-in-data"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.constants.dataspace"
+                  name="Constants in data space">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mconst-in-code"
+                  id="org.bitbrushers.piccbuilder.c32.c.compiler.option.memorymodel.constants.codespace"
+                  name="Constants in code space">
+            </enumeratedOptionValue>
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               name="Warnings"
+               owner="org.bitbrushers.piccbuilder.c32.c.compiler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-fsyntax-only"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.syntax"
+               name="Check syntax only (-fsyntax-only)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-pedantic"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.pedantic"
+               name="Pedantic (-pedantic)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-pedantic-errors"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.pedantic.error"
+               name="Pedantic warnings as errors (-pedantic-errors)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-w"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.nowarn"
+               name="Inhibit all warnings (-w)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-Wall"
+               defaultValue="true"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.allwarn"
+               name="All warnings (-Wall)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-Wextra"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.extrawarn"
+               name="Extra warnings (-Wextra)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.warnings"
+               command="-Werror"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.warnings.toerrors"
+               name="Warnings as errors (-Werror)"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               name="Miscellaneous"
+               owner="org.bitbrushers.piccbuilder.c32.c.compiler">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-ansi"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.misc.ansi"
+               name="Support ANSI programs (-ansi)"
+               value="false"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-Q"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.misc.verbosefunction"
+               name="Display function compilation (-Q)"
+               value="false"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-save-temps"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.misc.savetemps"
+               name="Don&apos;t delete intermediate files (-save-temps)"
+               value="false"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-v"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.other.verbose"
+               name="Verbose (-v)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-mlong-calls"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.other.longcalls"
+               name="Use indirect calls (-mlong-calls)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-mips16"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.other.mips16"
+               name="Generate 16-bit code (-mips16)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               command="-mno-float"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.compiler.option.other.excludefloat"
+               name="Exclude floating point library (-mno-float)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.compiler.category.other"
+               defaultValue="-c -fmessage-length=0"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.option.other.otherflags"
+               name="Other flags"
+               valueType="string">
+         </option>
+         <inputType
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.gnu.DefaultGCCDependencyCalculator2"
+               dependencyContentType="org.eclipse.cdt.core.cHeader"
+               dependencyExtensions="h"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.input"
+               languageId="org.eclipse.cdt.core.gcc"
+               sourceContentType="org.eclipse.cdt.core.cSource"
+               sources="c"
+               superClass="cdt.managedbuild.tool.gnu.c.compiler.input">
+         </inputType>
+         <outputType
+               buildVariable="OBJS"
+               id="org.bitbrushers.piccbuilder.c32.c.compiler.output"
+               outputs="o"
+               superClass="cdt.managedbuild.tool.gnu.c.compiler.output">
+         </outputType>
+      </tool>
+      <tool
+            command="pic32-gcc"
+            commandLineGenerator="org.bitbrushers.piccbuilder.PICManagedCommandLineGenerator"
+            errorParsers="org.eclipse.cdt.core.GLDErrorParser"
+            id="org.bitbrushers.piccbuilder.c32.c.linker"
+            isAbstract="false"
+            name="PIC C32 C Linker"
+            natureFilter="cnature"
+            outputFlag="-o">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.bitbrushers.piccbuilder.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildArtefactType">
+               <value
+                     id="org.bitbrushers.piccbuilder.buildArtefactType.application">
+               </value>
+            </property>
+         </supportedProperties>
+         <envVarBuildPath
+               pathType="buildpathLibrary"
+               variableList="LIBRARY_PATH">
+         </envVarBuildPath>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               name="General"
+               owner="org.bitbrushers.piccbuilder.c32.c.linker">
+         </optionCategory>
+         <option
+               browseType="file"
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="-Wl,--script=&quot;${VALUE}&quot;"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.scriptfile"
+               isAbstract="false"
+               name="Script file (-Wl,--script)"
+               resourceFilter="all"
+               valueType="string">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="--defsym=_min_heap_size="
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.heapSize"
+               name="Heap size"
+               valueType="string">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="--defsym=_min_stack_size="
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.minStackSize"
+               name="Min stack size"
+               valueType="string">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="-nodefaultlibs"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.nodeflibs"
+               name="Do not use default libraries (-nodefaultlibs)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="-nostdlib"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.nostdlibs"
+               name="No startup or default libs (-nostdlib)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="-s"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.strip"
+               name="Omit all symbol information (-s)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="--no-check-sections"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.allowOverlappedSections"
+               name="Allow overlapped sections"
+               valueType="boolean">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.link.category.libs"
+               name="Libraries"
+               owner="org.bitbrushers.piccbuilder.c32.c.linker">
+         </optionCategory>
+         <option
+               browseType="none"
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.libs"
+               command="-l"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.libs"
+               name="Libraries (-l)"
+               valueType="libs">
+         </option>
+         <option
+               browseType="directory"
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.libs"
+               command="-L"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.paths"
+               name="Library search path (-L)"
+               valueType="libPaths">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               name="Miscellaneous"
+               owner="org.bitbrushers.piccbuilder.c32.c.linker">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               command="-Xlinker ${VALUE}"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.ldflags"
+               name="Linker flags (-Xlinker [option])"
+               valueType="stringList">
+         </option>
+         <option
+               browseType="file"
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.otherobjs"
+               name="Other objects"
+               valueType="userObjs">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.mapfilename"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.other.mapfilename">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.other.cref"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.other.cref">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.other.printmap"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.other.printmap">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               command="-v"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.linker.option.other.verbose"
+               name="Verbose (-v)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.other"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.otherflags"
+               name="Other flags"
+               valueType="string">
+         </option>
+         <inputType
+               buildVariable="OBJS"
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
+               id="org.bitbrushers.piccbuilder.c32.c.linker.input"
+               multipleOfType="true"
+               sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
+               sources="o">
+            <additionalInput
+                  kind="additionalinputdependency"
+                  paths="$(USER_OBJS)">
+            </additionalInput>
+            <additionalInput
+                  kind="additionalinput"
+                  paths="$(LIBS)">
+            </additionalInput>
+         </inputType>
+         <outputType
+               buildVariable="EXECUTABLES"
+               id="org.bitbrushers.piccbuilder.c32.c.linker.output"
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider">
+         </outputType>
+         <option
+               applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.GprofAppCalculator"
+               command="-pg"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.debugging.gprof"
+               name="Generate gprof information (-pg)"
+               valueType="boolean">
+         </option>
+         <option
+               applicabilityCalculator="org.eclipse.cdt.managedbuilder.gnu.ui.ProfAppCalculator"
+               command="-p"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.link.option.debugging.prof"
+               name="Generate prof information (-p)"
+               valueType="boolean">
+         </option>
+      </tool>
+      <tool
+            command="pic32-ar"
+            id="org.bitbrushers.piccbuilder.c32.archiver"
+            isAbstract="false"
+            name="PIC C32 Archiver"
+            natureFilter="both">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.bitbrushers.piccbuilder.buildArtefactType.staticLib">
+            </checkBuildProperty>
+         </enablement>
+         <supportedProperties>
+            <property
+                  id="org.eclipse.cdt.build.core.buildArtefactType">
+               <value
+                     id="org.bitbrushers.piccbuilder.buildArtefactType.staticLib">
+               </value>
+            </property>
+         </supportedProperties>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.archiver.category.general"
+               name="General"
+               owner="org.bitbrushers.piccbuilder.c32.archiver">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.archiver.category.general"
+               defaultValue="-r"
+               id="org.bitbrushers.piccbuilder.c32.archiver.option.flags"
+               name="Archiver flags"
+               valueType="string">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.archiver.category.general"
+               command="-v"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.archiver.option.verbose"
+               name="Verbose (-v)"
+               valueType="boolean">
+         </option>
+         <inputType
+               buildVariable="OBJS"
+               dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
+               id="org.bitbrushers.piccbuilder.c32.archiver.input"
+               multipleOfType="true"
+               sourceContentType="org.eclipse.cdt.managedbuilder.core.compiledObjectFile"
+               sources="o">
+            <additionalInput
+                  kind="additionalinputdependency"
+                  paths="$(USER_OBJS)">
+            </additionalInput>
+            <additionalInput
+                  kind="additionalinput"
+                  paths="$(LIBS)">
+            </additionalInput>
+         </inputType>
+         <outputType
+               buildVariable="ARCHIVES"
+               id="org.bitbrushers.piccbuilder.c32.archiver.output"
+               nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
+               outputPrefix="lib"
+               outputs="a">
+         </outputType>
+      </tool>
+      <tool
+            command="pic32-bin2hex"
+            id="org.bitbrushers.piccbuilder.c32.createhex"
+            name="PIC Create Hex Image"
+            natureFilter="both">
+         <enablement
+               type="ALL">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.bitbrushers.piccbuilder.buildArtefactType.application">
+            </checkBuildProperty>
+         </enablement>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.createhex.general"
+               name="General"
+               owner="org.bitbrushers.piccbuilder.c32.createhex">
+         </optionCategory>
+         <outputType
+               buildVariable="SECONDARY_hex"
+               id="org.bitbrushers.piccbuilder.c32.createhex.output"
+               outputContentType="org.bitbrushers.piccbuilder.content-type.hex"
+               outputNames="${BuildArtifactFileBaseName}.hex"
+               outputs="hex">
+         </outputType>
+         <inputType
+               id="org.bitbrushers.piccbuilder.c32.createhex.input"
+               multipleOfType="true"
+               option="org.bitbrushers.piccbuilder.c32.createhex.InFileName"
+               sources="elf">
+         </inputType>
+      </tool>
+      <configuration
+            cleanCommand="del /SQ"
+            errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
+            id="org.bitbrushers.piccbuilder.c32.configuration.base"
+            name="PIC C32 Configuration">
+         <enablement
+               attribute="artifactExtension"
+               extensionAdjustment="false"
+               type="CONTAINER_ATTRIBUTE"
+               value="a">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+            </checkBuildProperty>
+         </enablement>
+      </configuration>
+      <configuration
+            cleanCommand="del /SQ"
+            id="org.bitbrushers.piccbuilder.c32.windows.configuration.base"
+            name="PIC C32 Configuration"
+            parent="org.bitbrushers.piccbuilder.c32.configuration.base">
+         <enablement
+               attribute="artifactExtension"
+               extensionAdjustment="false"
+               type="CONTAINER_ATTRIBUTE"
+               value="a">
+            <checkBuildProperty
+                  property="org.eclipse.cdt.build.core.buildArtefactType"
+                  value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
+            </checkBuildProperty>
+         </enablement>
+      </configuration>
+      <toolChain
+            archList="all"
+            id="org.bitbrushers.piccbuilder.c32.windows.toolchain.base"
+            isAbstract="false"
+            name="PIC C32"
+            osList="win32">
+         <targetPlatform
+               archList="all"
+               binaryParser="org.eclipse.cdt.core.GNU_ELF"
+               id="org.bitbrushers.piccbuilder.c32.windows.platform.base"
+               isAbstract="false"
+               name="Linux Platform"
+               osList="win32">
+         </targetPlatform>
+         <builder
+               command="mingw32-make"
+               id="org.bitbrushers.piccbuilder.c32.windows.builder.base"
+               isAbstract="false"
+               isVariableCaseSensitive="false"
+               name="PIC Make builder"
+               superClass="org.bitbrushers.piccbuilder.c32.builder">
+         </builder>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.windows.category.target"
+               name="Target Processor">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.windows.category.target"
+               id="org.bitbrushers.piccbuilder.c32.windows.option.target.processor"
+               name="Processor"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.processor">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.windows.category.debugging"
+               name="Debugging">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.windows.category.debugging"
+               id="org.bitbrushers.piccbuilder.c32.windows.option.debugging.level"
+               name="Debug level"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.debugging.level">
+         </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.windows.category.debugging"
+               id="org.bitbrushers.piccbuilder.c32.windows.option.debugging.other"
+               name="Other debugging flags"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.debugging.other">
+         </option>
+         <optionCategory
+               id="org.bitbrushers.piccbuilder.c32.windows.category.addtools"
+               name="Additional Tools">
+         </optionCategory>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.windows.category.addtools"
+               id="org.bitbrushers.piccbuilder.c32.windows.option.addtools.createhex"
+               name="Create Hex Image"
+               superClass="org.bitbrushers.piccbuilder.c32.base.option.addtools.createhex">
+         </option>
+         <tool
+               id="org.bitbrushers.piccbuilder.c32.windows.assembler.base"
+               isAbstract="false"
+               name="PIC C32 Assembler"
+               superClass="org.bitbrushers.piccbuilder.c32.assembler">
+            <inputType
+                  id="org.bitbrushers.piccbuilder.c32.windows.assembler.base.input"
+                  superClass="org.bitbrushers.piccbuilder.c32.assembler.input">
+            </inputType>
+         </tool>
+         <tool
+               id="org.bitbrushers.piccbuilder.c32.windows.c.compiler.base"
+               isAbstract="false"
+               name="PIC C32 C Compiler"
+               superClass="org.bitbrushers.piccbuilder.c32.c.compiler">
+            <inputType
+                  id="org.bitbrushers.piccbuilder.c32.windows.c.compiler.base.input"
+                  superClass="org.bitbrushers.piccbuilder.c32.c.compiler.input">
+            </inputType>
+         </tool>
+         <tool
+               id="org.bitbrushers.piccbuilder.c32.windows.c.linker.base"
+               isAbstract="false"
+               name="PIC C32 C Linker"
+               superClass="org.bitbrushers.piccbuilder.c32.c.linker">
+         </tool>
+         <tool
+               id="org.bitbrushers.piccbuilder.c32.windows.archiver.base"
+               isAbstract="false"
+               name="PIC C32 Archiver"
+               superClass="org.bitbrushers.piccbuilder.c32.archiver">
+         </tool>
+         <tool
+               id="org.bitbrushers.piccbuilder.c32.windows.createhex.base"
+               isAbstract="false"
+               name="PIC Create Hex Image"
+               superClass="org.bitbrushers.piccbuilder.c32.createhex">
+            <enablement
+                  type="ALL">
+               <checkOption
+                     holderId="org.bitbrushers.piccbuilder.c32.windows.toolchain.base"
+                     optionId="org.bitbrushers.piccbuilder.c32.windows.option.addtools.createhex"
+                     value="true">
+               </checkOption>
+               <and>
+                  <checkBuildProperty
+                        property="org.eclipse.cdt.build.core.buildArtefactType"
+                        value="org.bitbrushers.piccbuilder.buildArtefactType.application">
+                  </checkBuildProperty>
+               </and>
+            </enablement>
+         </tool>
+      </toolChain>
+      <projectType
+            buildArtefactType="org.bitbrushers.piccbuilder.buildArtefactType.application"
+            id="org.bitbrushers.piccbuilder.c32.windows.elf"
+            isAbstract="true"
+            name="PIC C32 Application">
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.bitbrushers.piccbuilder.c32.windows.elf.debug"
+               name="Debug"
+               parent="org.bitbrushers.piccbuilder.c32.windows.configuration.base">
+            <toolChain
+                  id="org.bitbrushers.piccbuilder.c32.windows.elf.toolchain.debug"
+                  isAbstract="false"
+                  secondaryOutputs="org.bitbrushers.piccbuilder.c32.createhex.output;"
+                  superClass="org.bitbrushers.piccbuilder.c32.windows.toolchain.base"
+                  targetTool="org.bitbrushers.piccbuilder.c32.windows.elf.c.linker.debug;org.bitbrushers.piccbuilder.c32.windows.elf.cpp.linker.debug">
+               <targetPlatform
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.platform.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.builder.debug"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.builder.base">
+               </builder>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.assembler.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.assembler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.c.compiler.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.c.linker.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.c.linker.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.createhex.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.createhex.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="elf"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.bitbrushers.piccbuilder.c32.windows.elf.release"
+               name="Release"
+               parent="org.bitbrushers.piccbuilder.c32.windows.configuration.base">
+            <toolChain
+                  id="org.bitbrushers.piccbuilder.c32.windows.elf.toolchain.release"
+                  isAbstract="false"
+                  secondaryOutputs="org.bitbrushers.piccbuilder.c32.createhex.output;"
+                  superClass="org.bitbrushers.piccbuilder.c32.windows.toolchain.base"
+                  targetTool="org.bitbrushers.piccbuilder.c32.windows.elf.c.linker.release;org.bitbrushers.piccbuilder.c32.windows.elf.cpp.linker.release">
+               <targetPlatform
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.platform.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.builder.release"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.builder.base">
+               </builder>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.assembler.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.assembler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.c.compiler.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.c.linker.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.c.linker.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.elf.createhex.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.createhex.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
+      <projectType
+            buildArtefactType="org.bitbrushers.piccbuilder.buildArtefactType.staticLib"
+            id="org.bitbrushers.piccbuilder.c32.windows.lib"
+            isAbstract="true"
+            name="PIC C30 Static Library">
+         <configuration
+               artifactExtension="a"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
+               id="org.bitbrushers.piccbuilder.c32.windows.lib.debug"
+               name="Debug"
+               parent="org.bitbrushers.piccbuilder.c32.windows.configuration.base">
+            <toolChain
+                  id="org.bitbrushers.piccbuilder.c32.windows.lib.toolchain.debug"
+                  isAbstract="false"
+                  superClass="org.bitbrushers.piccbuilder.c32.windows.toolchain.base"
+                  targetTool="org.bitbrushers.piccbuilder.c32.windows.lib.archiver.debug">
+               <targetPlatform
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.platform.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.builder.debug"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.builder.base">
+               </builder>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.assembler.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.assembler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.c.compiler.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.archiver.debug"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.archiver.base">
+               </tool>
+            </toolChain>
+         </configuration>
+         <configuration
+               artifactExtension="a"
+               buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
+               id="org.bitbrushers.piccbuilder.c32.windows.lib.release"
+               name="Release"
+               parent="org.bitbrushers.piccbuilder.c32.windows.configuration.base">
+            <toolChain
+                  id="org.bitbrushers.piccbuilder.c32.windows.lib.toolchain.release"
+                  isAbstract="false"
+                  superClass="org.bitbrushers.piccbuilder.c32.windows.toolchain.base"
+                  targetTool="org.bitbrushers.piccbuilder.c32.windows.lib.archiver.release">
+               <targetPlatform
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.platform.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.platform.base">
+               </targetPlatform>
+               <builder
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.builder.release"
+                     isAbstract="false"
+                     isVariableCaseSensitive="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.builder.base">
+               </builder>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.assembler.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.assembler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.c.compiler.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.c.compiler.base">
+               </tool>
+               <tool
+                     id="org.bitbrushers.piccbuilder.c32.windows.lib.archiver.release"
+                     isAbstract="false"
+                     superClass="org.bitbrushers.piccbuilder.c32.windows.archiver.base">
+               </tool>
+            </toolChain>
+         </configuration>
+      </projectType>
    </extension>
 
 </plugin>

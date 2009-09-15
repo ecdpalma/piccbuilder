@@ -13,6 +13,7 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
 public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator {
 
 	private static final String OPTION_SUFIX_PROCESSOR = ".option.target.processor";
+	private static final String OPTION_SUFIX_OBJECT_FILE_FORMAT = ".option.general.objectfileformat";
 	private static final String OPTION_SUFIX_THUMB = ".option.target.thumb";
 	private static final String OPTION_SUFIX_THUMB_INTERWORK = ".option.target.thumbinterwork";
 	private static final String OPTION_SUFIX_DEBUGGING_LEVEL = ".option.debugging.level";
@@ -52,6 +53,9 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 
 		String sProcessor;
 		sProcessor = null;
+		
+		String sObjectFileFormat;
+		sObjectFileFormat = null;
 
 		String sThumb;
 		sThumb = null;
@@ -109,6 +113,9 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 				if (sID.endsWith(OPTION_SUFIX_PROCESSOR)
 						|| sID.indexOf(OPTION_SUFIX_PROCESSOR + ".") > 0) {
 					sProcessor = sEnumCommand;
+				} else if (sID.endsWith(OPTION_SUFIX_OBJECT_FILE_FORMAT)
+						|| sID.indexOf(OPTION_SUFIX_OBJECT_FILE_FORMAT + ".") > 0) {
+					sObjectFileFormat = sEnumCommand;
 				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_LEVEL)
 						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_LEVEL + ".") > 0) {
 					sDebugLevel = sEnumCommand;
@@ -162,6 +169,8 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 
 		if (sProcessor != null && sProcessor.length() > 0)
 			oList.add(sProcessor);
+		if (sObjectFileFormat != null && sObjectFileFormat.length() > 0)
+			oList.add(sObjectFileFormat);
 		if (sThumb != null && sThumb.length() > 0)
 			oList.add(sThumb);
 		if (sThumbInterwork != null && sThumbInterwork.length() > 0)
