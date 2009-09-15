@@ -13,14 +13,9 @@ import org.eclipse.cdt.managedbuilder.internal.core.ManagedCommandLineGenerator;
 public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator {
 
 	private static final String OPTION_SUFIX_PROCESSOR = ".option.target.processor";
-	private static final String OPTION_SUFIX_OBJECT_FILE_FORMAT = ".option.general.objectfileformat";
-	private static final String OPTION_SUFIX_THUMB = ".option.target.thumb";
-	private static final String OPTION_SUFIX_THUMB_INTERWORK = ".option.target.thumbinterwork";
 	private static final String OPTION_SUFIX_DEBUGGING_LEVEL = ".option.debugging.level";
 	private static final String OPTION_SUFIX_DEBUGGING_FORMAT = ".option.debugging.format";
 	private static final String OPTION_SUFIX_DEBUGGING_OTHER = ".option.debugging.other";
-	private static final String OPTION_SUFIX_DEBUGGING_PROF = ".option.debugging.prof";
-	private static final String OPTION_SUFIX_DEBUGGING_GPROF = ".option.debugging.gprof";
 
 	private static final boolean DEBUG_LOCAL = false;
 
@@ -54,15 +49,6 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 		String sProcessor;
 		sProcessor = null;
 		
-		String sObjectFileFormat;
-		sObjectFileFormat = null;
-
-		String sThumb;
-		sThumb = null;
-
-		String sThumbInterwork;
-		sThumbInterwork = null;
-
 		String sDebugLevel;
 		sDebugLevel = null;
 
@@ -71,12 +57,6 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 
 		String sDebugOther;
 		sDebugOther = null;
-
-		String sDebugProf;
-		sDebugProf = null;
-
-		String sDebugGProf;
-		sDebugGProf = null;
 
 		for (int i = 0; i < aoOptions.length; ++i) {
 			IOption oOption;
@@ -113,9 +93,6 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 				if (sID.endsWith(OPTION_SUFIX_PROCESSOR)
 						|| sID.indexOf(OPTION_SUFIX_PROCESSOR + ".") > 0) {
 					sProcessor = sEnumCommand;
-				} else if (sID.endsWith(OPTION_SUFIX_OBJECT_FILE_FORMAT)
-						|| sID.indexOf(OPTION_SUFIX_OBJECT_FILE_FORMAT + ".") > 0) {
-					sObjectFileFormat = sEnumCommand;
 				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_LEVEL)
 						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_LEVEL + ".") > 0) {
 					sDebugLevel = sEnumCommand;
@@ -138,23 +115,6 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 					System.out.println(oOption.getName() + " " + sID + " "
 							+ bVal + " " + sCommand);
 
-				if (sID.endsWith(OPTION_SUFIX_THUMB)
-						|| sID.indexOf(OPTION_SUFIX_THUMB + ".") > 0) {
-					if (bVal)
-						sThumb = sCommand;
-				} else if (sID.endsWith(OPTION_SUFIX_THUMB_INTERWORK)
-						|| sID.indexOf(OPTION_SUFIX_THUMB_INTERWORK + ".") > 0) {
-					if (bVal)
-						sThumbInterwork = sCommand;
-				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_PROF)
-						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_PROF + ".") > 0) {
-					if (bVal)
-						sDebugProf = sCommand;
-				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_GPROF)
-						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_GPROF + ".") > 0) {
-					if (bVal)
-						sDebugGProf = sCommand;
-				}
 			} else {
 				if (DEBUG_LOCAL)
 					System.out.println(oOption.getName() + " " + sID + " "
@@ -163,18 +123,11 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 		}
 
 		if (DEBUG_LOCAL)
-			System.out.println(sProcessor + " " + sThumb + " "
-					+ sThumbInterwork + " " + sDebugLevel + " " + sDebugFormat
-					+ " " + sDebugOther + " " + sDebugProf + " " + sDebugGProf);
+			System.out.println(sProcessor + " " + sDebugFormat
+					+ " " + sDebugOther + " ");
 
 		if (sProcessor != null && sProcessor.length() > 0)
 			oList.add(sProcessor);
-		if (sObjectFileFormat != null && sObjectFileFormat.length() > 0)
-			oList.add(sObjectFileFormat);
-		if (sThumb != null && sThumb.length() > 0)
-			oList.add(sThumb);
-		if (sThumbInterwork != null && sThumbInterwork.length() > 0)
-			oList.add(sThumbInterwork);
 		if (sDebugLevel != null && sDebugLevel.length() > 0) {
 			oList.add(sDebugLevel);
 
@@ -183,10 +136,6 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 		}
 		if (sDebugOther != null && sDebugOther.length() > 0)
 			oList.add(sDebugOther);
-		if (sDebugProf != null && sDebugProf.length() > 0)
-			oList.add(sDebugProf);
-		if (sDebugGProf != null && sDebugGProf.length() > 0)
-			oList.add(sDebugGProf);
 
 		return super.generateCommandLineInfo(oTool, sCommandName, oList
 				.toArray(new String[0]), sOutputFlag, sOutputPrefix,

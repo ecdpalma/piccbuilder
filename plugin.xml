@@ -204,21 +204,6 @@
                name="Other debugging flags"
                valueType="string">
          </option>
-         <option
-               id="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat"
-               name="Object file format (-omf)"
-               valueType="enumerated">
-            <enumeratedOptionValue
-                  id="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat.coff"
-                  name="COFF">
-            </enumeratedOptionValue>
-            <enumeratedOptionValue
-                  command="-omf=elf"
-                  id="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat.elf"
-                  isDefault="true"
-                  name="ELF/DWARF">
-            </enumeratedOptionValue>
-         </option>
       </tool>
       <builder
             command="mingw32-make"
@@ -400,6 +385,7 @@
          </option>
          <option
                category="org.bitbrushers.piccbuilder.c30.assembler.category.other"
+               defaultValue="-omf=elf"
                id="org.bitbrushers.piccbuilder.c30.assembler.option.other.other"
                name="Other flags"
                valueType="string">
@@ -811,7 +797,7 @@
          </option>
          <option
                category="org.bitbrushers.piccbuilder.c30.c.compiler.category.other"
-               defaultValue="-c -fmessage-length=0"
+               defaultValue="-c -omf=elf"
                id="org.bitbrushers.piccbuilder.c30.c.compiler.option.other.otherflags"
                name="Other flags"
                valueType="string">
@@ -990,6 +976,7 @@
          </option>
          <option
                category="org.bitbrushers.piccbuilder.c30.c.link.category.other"
+               defaultValue="-omf=elf"
                id="org.bitbrushers.piccbuilder.c30.c.link.option.otherflags"
                name="Other flags"
                valueType="string">
@@ -1100,7 +1087,7 @@
       <tool
             command="pic30-bin2hex"
             id="org.bitbrushers.piccbuilder.c30.createhex"
-            name="PIC Create Hex Image"
+            name="PIC C30 Create Hex Image"
             natureFilter="both">
          <enablement
                type="ALL">
@@ -1216,16 +1203,6 @@
                id="org.bitbrushers.piccbuilder.c30.windows.option.target.processor"
                name="Processor"
                superClass="org.bitbrushers.piccbuilder.c30.base.option.processor">
-         </option>
-         <optionCategory
-               id="org.bitbrushers.piccbuilder.c30.windows.category.general"
-               name="General">
-         </optionCategory>
-         <option
-               category="org.bitbrushers.piccbuilder.c30.windows.category.general"
-               id="org.bitbrushers.piccbuilder.c30.windows.option.general.objectfileformat"
-               name="Object file format"
-               superClass="org.bitbrushers.piccbuilder.c30.base.option.objectfileformat">
          </option>
          <optionCategory
                id="org.bitbrushers.piccbuilder.c30.windows.category.debugging"
