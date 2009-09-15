@@ -8,7 +8,7 @@
    <extension
          id="PIC_GCC_ContentTypes"
          name="Content Types"
-         point="org.eclipse.core.runtime.contentTypes">
+         point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.core.runtime.text"
             file-extensions="hex"
