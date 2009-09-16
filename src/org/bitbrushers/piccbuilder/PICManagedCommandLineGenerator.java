@@ -14,6 +14,7 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 
 	private static final String OPTION_SUFIX_PROCESSOR = ".option.target.processor";
 	private static final String OPTION_SUFIX_DEBUGGING_LEVEL = ".option.debugging.level";
+	private static final String OPTION_SUFIX_LINKER_DEBUG_TOOL = ".elf.c.linker.debug";
 	private static final String OPTION_SUFIX_DEBUGGING_FORMAT = ".option.debugging.format";
 	private static final String OPTION_SUFIX_DEBUGGING_OTHER = ".option.debugging.other";
 
@@ -95,7 +96,12 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 					sProcessor = sEnumCommand;
 				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_LEVEL)
 						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_LEVEL + ".") > 0) {
-					sDebugLevel = sEnumCommand;
+					if (oTool.getSuperClass().getId().endsWith(OPTION_SUFIX_LINKER_DEBUG_TOOL)) {
+						sDebugLevel = "--defsym=__MPLAB_DEBUG=1";
+					}
+					else {
+						sDebugLevel = sEnumCommand;
+					}
 				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_FORMAT)
 						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_FORMAT + ".") > 0) {
 					sDebugFormat = sEnumCommand;

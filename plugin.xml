@@ -124,7 +124,7 @@
                   name="None">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-g"
+                  command="-D__DEBUG -g"
                   id="org.bitbrushers.piccbuilder.c30.base.option.debugging.level.default"
                   isDefault="true"
                   name="Default (-g)">
@@ -143,7 +143,7 @@
                   attribute="value"
                   extensionAdjustment="false"
                   type="CONTAINER_ATTRIBUTE"
-                  value="org.bitbrushers.piccbuilder.c30.base.option.debugging.level.max">
+                  value="org.bitbrushers.piccbuilder.c30.base.option.debugging.level.default">
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildType"
                      value="org.eclipse.cdt.build.core.buildType.debug">
@@ -2077,7 +2077,7 @@
             cleanCommand="del"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.bitbrushers.piccbuilder.c30.configuration.base"
-            name="PIC C30 Configuration">
+            name="PIC C30 Configuration Base">
       
          <enablement
                attribute="artifactExtension"
@@ -2478,7 +2478,7 @@
                   name="None">
             </enumeratedOptionValue>
             <enumeratedOptionValue
-                  command="-g"
+                  command="-D__DEBUG -g"
                   id="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.default"
                   isDefault="true"
                   name="Default (-g)">
@@ -2497,7 +2497,7 @@
                   attribute="value"
                   extensionAdjustment="false"
                   type="CONTAINER_ATTRIBUTE"
-                  value="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.max">
+                  value="org.bitbrushers.piccbuilder.c32.base.option.debugging.level.default">
                <checkBuildProperty
                      property="org.eclipse.cdt.build.core.buildType"
                      value="org.eclipse.cdt.build.core.buildType.debug">
@@ -3573,7 +3573,7 @@
             cleanCommand="del"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.bitbrushers.piccbuilder.c32.configuration.base"
-            name="PIC C32 Configuration">
+            name="PIC C32 Configuration Base">
          <enablement
                attribute="artifactExtension"
                extensionAdjustment="false"
