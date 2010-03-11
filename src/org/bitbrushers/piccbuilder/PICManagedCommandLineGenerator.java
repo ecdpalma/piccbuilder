@@ -91,11 +91,14 @@ public class PICManagedCommandLineGenerator extends ManagedCommandLineGenerator 
 					System.out.println(oOption.getName() + " " + sID + " "
 							+ sVal + " " + sCommand + " " + sEnumCommand);
 
-				if (sID.endsWith(OPTION_SUFIX_PROCESSOR)
-						|| sID.indexOf(OPTION_SUFIX_PROCESSOR + ".") > 0) {
+				if ((sID.endsWith(OPTION_SUFIX_PROCESSOR)
+						|| sID.indexOf(OPTION_SUFIX_PROCESSOR + ".") > 0)
+						&& !sID.contains("c18")) {
 					sProcessor = sEnumCommand;
-				} else if (sID.endsWith(OPTION_SUFIX_DEBUGGING_LEVEL)
-						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_LEVEL + ".") > 0) {
+				} else if ((sID.endsWith(OPTION_SUFIX_DEBUGGING_LEVEL)
+						|| sID.indexOf(OPTION_SUFIX_DEBUGGING_LEVEL + ".") > 0)
+						&& !sID.contains("c18")) {
+
 					if (oTool.getSuperClass().getId().endsWith(OPTION_SUFIX_LINKER_DEBUG_TOOL)) {
 						sDebugLevel = "--defsym=__MPLAB_DEBUG=1";
 					}
