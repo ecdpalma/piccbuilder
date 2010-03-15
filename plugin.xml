@@ -1414,7 +1414,7 @@
             isAbstract="false"
             name="PIC C18 Assembler"
             natureFilter="both"
-            outputFlag="-o">
+            outputFlag="/o">
          <supportedProperties>
             <property
                   id="org.eclipse.cdt.build.core.buildType">
@@ -1545,8 +1545,45 @@
                owner="org.bitbrushers.piccbuilder.c18.c.compiler">
          </optionCategory>
          <option
+               id="org.bitbrushers.piccbuilder.c18.option.general.debuglevel"
+               name="Debug Level"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  id="org.bitbrushers.piccbuilder.c18.option.general.debuglevel.none"
+                  isDefault="false"
+                  name="None">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-D__DEBUG"
+                  id="org.bitbrushers.piccbuilder.c18.option.general.debuglevel.default"
+                  isDefault="true"
+                  name="Default">
+            </enumeratedOptionValue>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.bitbrushers.piccbuilder.c18.base.option.debugging.level.none">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.release">
+               </checkBuildProperty>
+            </enablement>
+            <enablement
+                  attribute="value"
+                  extensionAdjustment="false"
+                  type="CONTAINER_ATTRIBUTE"
+                  value="org.bitbrushers.piccbuilder.c18.base.option.debugging.level.default">
+               <checkBuildProperty
+                     property="org.eclipse.cdt.build.core.buildType"
+                     value="org.eclipse.cdt.build.core.buildType.debug">
+               </checkBuildProperty>
+            </enablement>
+         </option>
+         <option
                browseType="directory"
                category="org.bitbrushers.piccbuilder.c18.c.compiler.category.general"
+               command="-I"
                id="org.bitbrushers.piccbuilder.c18.c.compiler.option.general.paths"
                name="Include paths"
                valueType="includePath">
@@ -1561,16 +1598,19 @@
             <enumeratedOptionValue
                   command="-w1"
                   id="org.bitbrushers.piccbuilder.c18.c.compiler.option.general.diagnosticlevel.errors"
+                  isDefault="false"
                   name="Errors only">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-w2"
                   id="org.bitbrushers.piccbuilder.c18.c.compiler.option.general.diagnosticlevel.errorswarnings"
+                  isDefault="false"
                   name="Errors and warnings">
             </enumeratedOptionValue>
             <enumeratedOptionValue
                   command="-w3"
                   id="org.bitbrushers.piccbuilder.c18.c.compiler.option.general.diagnosticlevel.errorswarningmessages"
+                  isDefault="true"
                   name="Errors, warning and messages">
             </enumeratedOptionValue>
          </option>
@@ -1609,7 +1649,7 @@
                resourceFilter="all"
                valueType="enumerated">
             <enumeratedOptionValue
-                  command="-w1"
+                  command="-sca"
                   id="org.bitbrushers.piccbuilder.c18.c.compiler.option.general.storageclass.auto"
                   isDefault="true"
                   name="Auto">
@@ -1963,7 +2003,7 @@
          </option>
       </tool>
       <tool
-            command="pic18-ar"
+            command="mplib /c"
             id="org.bitbrushers.piccbuilder.c18.archiver"
             isAbstract="false"
             name="PIC C18 Archiver"
@@ -1983,26 +2023,6 @@
                </value>
             </property>
          </supportedProperties>
-         <optionCategory
-               id="org.bitbrushers.piccbuilder.c18.archiver.category.general"
-               name="General"
-               owner="org.bitbrushers.piccbuilder.c18.archiver">
-         </optionCategory>
-         <option
-               category="org.bitbrushers.piccbuilder.c18.archiver.category.general"
-               defaultValue="-r"
-               id="org.bitbrushers.piccbuilder.c18.archiver.option.flags"
-               name="Archiver flags"
-               valueType="string">
-         </option>
-         <option
-               category="org.bitbrushers.piccbuilder.c18.archiver.category.general"
-               command="-v"
-               defaultValue="false"
-               id="org.bitbrushers.piccbuilder.c18.archiver.option.verbose"
-               name="Verbose (-v)"
-               valueType="boolean">
-         </option>
          <inputType
                buildVariable="OBJS"
                dependencyCalculator="org.eclipse.cdt.managedbuilder.makegen.internal.DefaultNoDependencyCalculator"
@@ -2023,12 +2043,10 @@
                buildVariable="ARCHIVES"
                id="org.bitbrushers.piccbuilder.c18.archiver.output"
                nameProvider="org.eclipse.cdt.managedbuilder.makegen.gnu.GnuLinkOutputNameProvider"
-               outputPrefix="lib"
-               outputs="a">
+               outputs="lib">
          </outputType>
       </tool>
       <configuration
-            cleanCommand="del"
             errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser"
             id="org.bitbrushers.piccbuilder.c18.configuration.base"
             name="PIC C18 Configuration Base">
@@ -2036,7 +2054,7 @@
                attribute="artifactExtension"
                extensionAdjustment="false"
                type="CONTAINER_ATTRIBUTE"
-               value="a">
+               value="lib">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
                   value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
@@ -2052,7 +2070,7 @@
                attribute="artifactExtension"
                extensionAdjustment="false"
                type="CONTAINER_ATTRIBUTE"
-               value="a">
+               value="lib">
             <checkBuildProperty
                   property="org.eclipse.cdt.build.core.buildArtefactType"
                   value="org.eclipse.cdt.build.core.buildArtefactType.staticLib">
@@ -2214,7 +2232,7 @@
             isAbstract="true"
             name="PIC C18 Static Library">
          <configuration
-               artifactExtension="a"
+               artifactExtension="lib"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug"
                id="org.bitbrushers.piccbuilder.c18.windows.lib.debug"
                name="Debug"
@@ -2253,7 +2271,7 @@
             </toolChain>
          </configuration>
          <configuration
-               artifactExtension="a"
+               artifactExtension="lib"
                buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release"
                id="org.bitbrushers.piccbuilder.c18.windows.lib.release"
                name="Release"
@@ -3346,6 +3364,11 @@
 
          </option>
          <option
+               id="org.bitbrushers.piccbuilder.c30.base.option.debugging.other"
+               name="Other debugging flags"
+               valueType="string">
+         </option>
+         <option
                defaultValue="true"
                id="org.bitbrushers.piccbuilder.c30.base.option.addtools.createhex"
                name="Create Hex Image"
@@ -3377,11 +3400,6 @@
                defaultValue="${BuildArtifactFileBaseName}.map"
                id="org.bitbrushers.piccbuilder.c30.base.option.other.mapfilename"
                name="Map Filename"
-               valueType="string">
-         </option>
-         <option
-               id="org.bitbrushers.piccbuilder.c30.base.option.debugging.other"
-               name="Other debugging flags"
                valueType="string">
          </option>
       </tool>
