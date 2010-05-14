@@ -6156,5 +6156,21 @@
          </configuration>
       </projectType>
    </extension>
+   <extension
+         id="C18 Error Parser"
+         name="MCC18 Error Parser"
+         point="org.eclipse.cdt.core.ErrorParser">
+      <errorparser
+            class="org.bitbrushers.piccbuilder.MCC18ErrorParser">
+      </errorparser>
+   </extension>
+   <extension
+         id="Mplib Error Parser"
+         name="Mplib Error Parser"
+         point="org.eclipse.cdt.core.ErrorParser">
+      <errorparser
+            class="org.bitbrushers.piccbuilder.MplibErrorParser">
+      </errorparser>
+   </extension>
 
 </plugin>
