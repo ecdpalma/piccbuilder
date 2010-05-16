@@ -3366,6 +3366,14 @@
                name="Allow overlapped sections"
                valueType="boolean">
          </option>
+         <option
+               category="org.bitbrushers.piccbuilder.c32.c.link.category.general"
+               command="-mips16"
+               defaultValue="false"
+               id="org.bitbrushers.piccbuilder.c32.c.linker.option.general.mips16"
+               name="Generate 16-bit code (-mips16)"
+               valueType="boolean">
+         </option>
          <optionCategory
                id="org.bitbrushers.piccbuilder.c32.c.link.category.libs"
                name="Libraries"
