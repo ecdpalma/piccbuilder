@@ -3540,6 +3540,7 @@
       </tool>
       <tool
             command="pic32-bin2hex"
+            commandLinePattern="${COMMAND} ${FLAGS}  ${INPUTS}"
             id="org.bitbrushers.piccbuilder.c32.createhex"
             name="PIC Create Hex Image"
             natureFilter="both">
@@ -3568,6 +3569,12 @@
                option="org.bitbrushers.piccbuilder.c32.createhex.InFileName"
                sources="elf">
          </inputType>
+         <option
+               id="org.bitbrushers.piccbuilder.c32.createhex.InFileName"
+               resourceFilter="all"
+               value="${BuildArtifactFileName}"
+               valueType="string">
+         </option>
       </tool>
       <configuration
             cleanCommand="del"
