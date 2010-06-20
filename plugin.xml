@@ -1799,7 +1799,7 @@
          </option>
          <option
                category="org.bitbrushers.piccbuilder.c30.c.link.category.general"
-               command="--heap="
+               command="-Wl,--heap="
                id="org.bitbrushers.piccbuilder.c30.c.link.option.heapSize"
                name="Heap size"
                valueType="string">
